@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/bootstrap.xhtml">
+
+<ui:define name="pageTitle">Login</ui:define>
+<ui:define name="contentPrimary">
+
+
+<h:form id="form">
+    <p:dataView var="customer" value="#{customerController.customers}"
+                gridIcon="pi pi-th-large" listIcon="pi pi-bars">
+ 
+        <p:dataViewGridItem>
+            <p:panel header="#{customer.id}" style="text-align:center">
+                <h:panelGrid columns="2" cellpadding="4" style="width:100%">
+ 								<h:outputText value="Firt Name" />
+								<h:outputText value="#{customer.fname}"
+									style="font-weight: bold" />
+
+								<h:outputText value="Last Name" />
+								<h:outputText value="#{customer.lname}"
+									style="font-weight: bold" />
+    <p:commandLink id="update"  ajax="false" styleClass="fa fa-fw fa-edit text-success" action="#{customerController.editCustomer(customer)}" style="margin-right:20px;">
+
+    </p:commandLink>
+        <p:commandLink id="delete"  ajax="false" styleClass="fa fa-fw fa-remove text-dange" action="#{customerController.deleteCustomer(customer.id)}" style="margin-right:20px;">
+
+    </p:commandLink>
+                </h:panelGrid>
+            </p:panel>
+        </p:dataViewGridItem>
+ 
+        <p:dataViewListItem>
+             <h:panelGrid columns="3" style="width:100%" columnClasses="detail,logo,logo">
+ 
+						<p:outputPanel>
+							<h:panelGrid columns="2" cellpadding="2">
+								<h:outputText value="Id: " />
+								<h:outputText value="#{customer.id}" style="font-weight: bold" />
+
+								<h:outputText value="Firt Name: " />
+								<h:outputText value="#{customer.fname}"
+									style="font-weight: bold" />
+
+								<h:outputText value="Last Name: " />
+								<h:outputText value="#{customer.lname}"
+									style="font-weight: bold" />
+							</h:panelGrid>
+						</p:outputPanel>
+ 
+  <p:commandLink id="update2"  ajax="false" styleClass="fa fa-fw fa-edit text-success" action="#{customerController.editCustomer(customer)}" style="margin-right:20px;">
+
+    </p:commandLink>
+        <p:commandLink id="delete2"  ajax="false" styleClass="fa fa-fw fa-remove text-dange" action="#{customerController.deleteCustomer(customer.id)}" style="margin-right:20px;">
+
+    </p:commandLink>
+    
+            </h:panelGrid>
+        </p:dataViewListItem>
+    </p:dataView>
+    </h:form>
+    </ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<pretty-config xmlns="http://ocpsoft.com/prettyfaces/3.3.3"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<url-mapping id="viewallcustomer">
+		<pattern value="/Customers" />
+		<view-id value="/pages/viewAllCustomer.xhtml" />
+	</url-mapping>
+	<url-mapping id="registercustomer">
+		<pattern value="/Registration Form" />
+		<view-id value="/pages/CustomerRegistration.xhtml" />
+	</url-mapping>
+		<url-mapping id="Employee">
+		<pattern value="/Employee" />
+		<view-id value="/pages/Employee2.xhtml" />
+	</url-mapping>
+		<url-mapping id="Products">
+		<pattern value="/Products" />
+		<view-id value="/pages/Products.xhtml" />
+	</url-mapping>
+		<url-mapping id="Home">
+		<pattern value="/Jewellery" />
+		<view-id value="/index.xhtml" />
+	</url-mapping>
+		<url-mapping id="Thanks">
+		<pattern value="/Thanks You Mr Nagowah" />
+		<view-id value="/pages/thnx.xhtml" />
+	</url-mapping>
+		
+</pretty-config>

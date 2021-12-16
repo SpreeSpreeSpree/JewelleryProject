@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head></h:head>
+<ui:composition template="/templates/bootstrap.xhtml">
+
+	<ui:define name="pageTitle">Login</ui:define>
+	<ui:define name="contentPrimary">
+<h:form>
+
+<p:panel id="printable" style="width:950px">
+	<div class="ui-fluid">
+		<h1>Employee Payroll</h1>
+		
+	
+			
+			<p:fieldset legend="Employee Details" style="margin-bottom:40px;width:850px">
+				
+				<p:panelGrid  columns="6" layout="grid" styleClass="ui-panelgrid-blank ui-fluid">
+				
+					<p:outputLabel value="Emp Id:" />			
+					<p:inputText value="#{employeController.id}"></p:inputText>
+					
+					<p:outputLabel value="First name:" />			
+					<p:inputText value="#{employeController.fname}"></p:inputText>
+						
+					<p:outputLabel value="Last name:" />
+					<p:inputText value="#{employeController.lname}"></p:inputText>
+												
+					<p:commandButton value="Find " action="#{employeController.getUser}" ajax="false"></p:commandButton>	
+					<p:outputLabel></p:outputLabel>
+				</p:panelGrid>
+			</p:fieldset>
+
+		
+ 		
+              
+          <p:fieldset legend="Payroll Form"  style="margin-bottom:40px;width:850px">
+			
+			<p:fieldset legend="Position" >
+				<p:selectOneListbox id="position" value="#{payroll.position}" style="width:450px">
+		            <f:selectItem itemLabel="Director" itemValue="di"/>
+		            <f:selectItem itemLabel="Manager" itemValue="ma"/>
+		            <f:selectItem itemLabel="Engineer" itemValue="eng"/>
+		            <f:selectItem itemLabel="Technician" itemValue="tec"/>
+		            <p:ajax listener="#{payroll.Calculate}" update="sub vat tot"></p:ajax>
+        		</p:selectOneListbox>	
+			
+			</p:fieldset><br/>
+			
+			<p:fieldset legend="Job Type">
+				<p:selectOneRadio value="#{payroll.jobtype}" unselectable="true">
+		            <f:selectItem itemLabel="Full-Time" itemValue="ft"/>
+		            <f:selectItem itemLabel="Part-Time" itemValue="pt"/>
+		            <p:ajax listener="#{payroll.Calculate}" update="sub vat tot"></p:ajax>
+        		</p:selectOneRadio>
+			</p:fieldset><br/>
+			
+			
+			<p:fieldset legend="Work Details">
+				Number of Hours Worked:<p:spinner min="8" max="160" style="width:150px" value="#{payroll.h}">
+					<p:ajax listener="#{payroll.Calculate}" update="sub vat tot"></p:ajax>
+				</p:spinner>
+
+				<p:selectManyCheckbox value="#{payroll.addbonus}">
+			        <f:selectItem itemLabel="Overtime" itemValue="over"/>
+			        <f:selectItem itemLabel="Bonus" itemValue="bonus"/>
+			        <p:ajax listener="#{payroll.Calculate}" update="sub vat tot"></p:ajax>
+    			</p:selectManyCheckbox>
+			</p:fieldset><br/>
+			
+			<p:fieldset legend="Total">
+				Gross Pay:Rs <h:outputLabel id="sub" value="#{payroll.sub}"></h:outputLabel>
+				<p:tooltip for="sub" value="Gross Pay Value" position="top" /><br/>
+				Welfare Fund(5%):-Rs <h:outputLabel id="vat" value="#{payroll.vat}"></h:outputLabel>
+				<p:tooltip for="vat" value="Deduction Amount for Welfare Fund" position="top" /><br/>
+				Nett Pay:Rs <h:outputLabel id="tot" value="#{payroll.total}"></h:outputLabel><br/>
+				<p:tooltip for="tot" value="Total Nett Pay" trackMouse="true" />	
+			</p:fieldset><br/>
+			
+			<p:fieldset legend="Form Comfirmation" toggleable="true"  style="width:650px">
+				<h:panelGrid columns="2" cellpadding="5" >
+		            <p:outputLabel for="buttonD" value="Pay Date:" />
+		       		<p:datePicker id="buttonD" value="#{payroll.date1}" showIcon="true" />
+		       		
+		       		Signature: <p:signature style="width:250px;height:55px" widgetVar="sig" guideline="true"/>
+       				<p:commandButton value="Clear" icon="pi pi-times" type="button" onclick="PF('sig').clear()"/>
+       		
+       				<p:commandButton value="Print" type="button" icon="pi pi-print">
+               			   <p:printer target="printable"/>
+           		    </p:commandButton>
+		       	</h:panelGrid>
+			</p:fieldset>
+			
+		</p:fieldset>	
+				
+	</div>
+			
+</p:panel>
+</h:form>
+</ui:define>
+</ui:composition>
+</html> 

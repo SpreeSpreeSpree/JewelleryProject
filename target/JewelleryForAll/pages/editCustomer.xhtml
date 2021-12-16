@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head></h:head>
+<ui:composition template="/templates/bootstrap.xhtml">
+
+	<ui:define name="pageTitle">Edit Customer</ui:define>
+	<ui:define name="contentPrimary">
+		<div class="col-12" style="display: flex; justify-content: center;">
+
+			<div class="card">
+
+				<h5 class="card-header info-color white-text text-center py-4">
+					<strong>Registration Form</strong>
+				</h5>
+
+				<div class="card-body px-lg-5 pt-0">
+
+					<h:form style="color: #757575;">
+						<h:panelGrid id="grid" cellpadding="7" class="w-100" columns="2"
+							style="margin-bottom:10px">
+							<f:facet name="header">
+								<p:messages id="msgs" />
+							</f:facet>
+							<p:outputLabel for="firstname" value="Firstname:" />
+							<p:inputText class="form-control" id="firstname"
+								value="#{customerController.cust.fname}" required="true" />
+
+							<p:outputLabel for="lastname" value="Surname:" />
+							<p:inputText class="form-control" id="lastname"
+								value="#{customerController.cust.lname}" required="true"
+								requiredMessage="Last Name is required." />
+
+							<p:outputLabel value="Basic" />
+							<h:panelGrid columns="2"	cellpadding="5">
+								<p:selectOneRadio id="gender" value="#{customerController.cust.gender}"
+									unselectable="false">
+									<f:selectItem itemLabel="Male" itemValue="M" />
+									<f:selectItem itemLabel="Female" itemValue="F" />
+								</p:selectOneRadio>
+							</h:panelGrid>
+							
+							<p:outputLabel for="phone" value="Phone:" />
+							 <p:inputMask class="form-control" id="phone" value="#{customerController.cust.phone}" 
+								 mask=" 59999999" />
+							<p:outputLabel for="Address" value="Address: " />
+							<p:inputTextarea rows="5" value="#{customer.address}" cols="36" counter="Address"
+								maxlength="100" counterTemplate="{0} characters remaining."
+								autoResize="false" />
+							<br />
+							<h:outputText id="Address" />
+							<p:growl id="growl" showSummary="true" showDetail="true"
+								keepAlive="true" life="3000">
+								<p:autoUpdate />
+							</p:growl>
+						</h:panelGrid>
+						<p:commandButton class="col-12" action="#{customerController.updateCustomer(customerController.cust)}" ajax="false" value="Update"></p:commandButton>
+
+						<div class="col-12 d-flex justify-content-center">
+							<!-- Social register -->
+							<a type="button" class="btn-floating btn-fb btn-sm"> <i
+								class="fab fa-facebook-f"></i>
+							</a> <a type="button" class="btn-floating btn-tw btn-sm"> <i
+								class="fab fa-twitter"></i>
+							</a> <a type="button" class="btn-floating btn-li btn-sm"> <i
+								class="fab fa-linkedin-in"></i>
+							</a> <a type="button" class="btn-floating btn-git btn-sm"> <i
+								class="fab fa-github"></i>
+							</a>
+						</div>
+
+
+						<p>
+							<em>Do not click on register</em> else you agree to our <a
+								href="#">terms of service</a>
+						</p>
+
+					</h:form>
+				</div>
+
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

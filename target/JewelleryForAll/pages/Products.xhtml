@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head></h:head>
+<ui:composition template="/templates/bootstrap.xhtml">
+
+	<ui:define name="pageTitle">Login</ui:define>
+	<ui:define name="contentPrimary">
+
+<h:form>
+
+<h1>PRODUCT DETAILS</h1>
+	<div class="ui-fluid">
+		<p:fieldset legend = "Find Product" style = "width:700px">
+		
+			<p:panelGrid  columns="3" layout="grid" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-4,ui-g-12 ui-md-2,ui-g-12 ui-md-4"  styleClass="ui-panelgrid-blank ui-fluid">
+				<p:outputLabel value="Product Code:" />
+				<p:inputText value="#{productController.productCode}"></p:inputText>
+				<p:commandButton value="Find " action="#{productController.getProduct}" ajax = "false"></p:commandButton>
+				
+			</p:panelGrid>
+		</p:fieldset><br></br>
+	</div>
+</h:form>
+
+<h:form id = "a">
+
+	<div class="ui-fluid">
+		<p:fieldset legend = "Add or Update a Product" style = "width:700px">
+		
+		<p:panelGrid   id = "panel" columns="4" layout="grid" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-4,ui-g-12 ui-md-2,ui-g-12 ui-md-4"  styleClass="ui-panelgrid-blank ui-fluid">
+			
+			
+			<p:outputLabel value="Product Code:" />
+			<p:inputText value="#{productController.productCode}" style="width:200px" required = "true" id="productCode" title="Insert a Product Code" 
+			requiredMessage="product code required"></p:inputText>
+			<p:message for="productCode"></p:message>
+			<p:tooltip for="productCode" showEvent="focus" hideEvent="blur" />
+			
+			<p:outputLabel value="Product name:" />
+			
+			<p:inputText value="#{productController.productName}" style="width:200px" required = "true" id="productName" title="Insert a Product Name" 
+			requiredMessage="Product name required"></p:inputText>
+			<p:message for="productName"></p:message>
+			<p:tooltip for="productName" showEvent="focus" hideEvent="blur" />
+			
+			<p:outputLabel value="SalesPerson:" />
+			<p:inputMask mask="*.aaa" value="#{productController.salesPerson}" style="width:200px" required = "true" id="sales" title="Salesperson Name" 
+			requiredMessage="Salesperson's Name required"></p:inputMask>
+			<p:message for="sales"></p:message>
+			<p:tooltip for="sales" showEvent="focus" hideEvent="blur" />
+			
+			<p:outputLabel value="Type:" />
+			<p:inputMask mask="aa-999" value="#{productController.type}" style="width:200px" title="Insert a Product type" required = "true" id="type" 
+			requiredMessage="Type of product required"></p:inputMask>
+			<p:message for="type"></p:message>
+			<p:tooltip for="type" showEvent="focus" hideEvent="blur" />
+			
+			<p:outputLabel value="Quantity:" />
+			<p:inputText value="#{productController.quantity}" style="width:200px" required = "true" id="quantity" title="Insert Quantity of  Product " 
+			requiredMessage="quantity required"></p:inputText>
+			<p:message for="quantity"></p:message>
+			<p:tooltip for="quantity" showEvent="focus" hideEvent="blur" />
+			
+
+			
+			<p:outputLabel value="Weight:" />
+        	<p:inputText id="Weight"  value="#{productController.weight}"  />
+        	<p:outputLabel value="" /><p:slider for="Weight" />
+
+    			
+			<p:outputLabel value="Price:" />
+			<p:inputText value="#{productController.price}" required = "true" id="price" style="width:200px" 
+			title="Insert product price" requiredMessage="Price Required"></p:inputText>
+			<p:message for="price"></p:message>
+			<p:tooltip for="price" showEvent="focus" hideEvent="blur" />
+			
+		</p:panelGrid>
+		<p:panelGrid columns="4" styleClass="ui-panelgrid-blank ui-fluid">
+		
+			<p:commandButton value="Add " action="#{productController.addProduct}"  update="@form" ajax = "false">
+			
+			</p:commandButton>
+			<p:commandButton value="Update " action="#{productController.updateProduct}" ajax = "false"></p:commandButton>
+			<p:commandButton value="Clear " action="#{productController.reset}" ajax = "false"></p:commandButton>
+		
+		</p:panelGrid>
+		</p:fieldset><br></br>
+	</div>
+</h:form>
+<h:form>
+
+<div class="ui-fluid">
+	<p:fieldset legend = "Delete a Product" style = "width:700px">
+	
+		<p:panelGrid  columns="3" layout="grid" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-4,ui-g-12 ui-md-2,ui-g-12 ui-md-4"  styleClass="ui-panelgrid-blank ui-fluid">
+		
+		
+			<p:outputLabel value="Product Code:" />
+			<p:inputText value="#{productController.productCode}" required = "true" id="productCode" requiredMessage="product code required"></p:inputText>
+			<p:message for="productCode"></p:message>
+			
+		</p:panelGrid>
+		<p:panelGrid columns="1" styleClass="ui-panelgrid-blank ui-fluid">
+		
+			<p:commandButton value="Delete " action="#{productController.deleteProduct}"  ajax = "false" >
+				<p:confirm header="Delete" message="Are you sure you want to delete this product?" icon="pi pi-exclamation-triangle" />
+			</p:commandButton>
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+			        <p:commandButton value="Yes" action="#{productController.deleteProduct}" type="submit" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+			        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+			    </p:confirmDialog>
+			
+		</p:panelGrid>
+	</p:fieldset><br></br>
+</div>
+</h:form>
+
+<h:form >
+	
+		<p:fieldset legend = "View all Products" style = "width:1200px">
+				<p:dataTable id = "tbl" value = "#{productController.allProducts }" var="b"  border= "1"
+				 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+		                 paginator="true" rows="5" style="margin-bottom:20px">
+			        
+			                
+			                
+					<p:column> 
+						<f:facet name="header">
+						<f:verbatim>Product Code</f:verbatim>
+						</f:facet>
+						<h:outputText value = "#{b.productCode }"></h:outputText>
+					</p:column>
+					
+					<p:column> 
+						<f:facet name="header">
+						<f:verbatim>Product Name</f:verbatim>
+						</f:facet>
+						<h:outputText value = "#{b.productName }"></h:outputText>
+					</p:column>
+						
+					<p:column> 
+						<f:facet name="header">
+						<f:verbatim>SalesPerson </f:verbatim>
+						</f:facet>
+						<h:outputText value = "#{b.salesPerson }"></h:outputText>
+					</p:column>
+					
+					<p:column> 
+						<f:facet name="header">
+						<f:verbatim>Type</f:verbatim>
+						</f:facet>
+						<h:outputText value = "#{b.type }"></h:outputText>
+					</p:column>
+					
+					<p:column> 
+						<f:facet name="header">
+						<f:verbatim>Quantity</f:verbatim>
+						</f:facet>
+						<h:outputText value = "#{b.quantity }"></h:outputText>
+					</p:column>
+					
+					<p:column> 
+						<f:facet name="header">
+						<f:verbatim>Weight</f:verbatim>
+						</f:facet>
+						<h:outputText value = "#{b.weight }"></h:outputText>
+					</p:column>
+					
+					<p:column> 
+						<f:facet name="header">
+						<f:verbatim>Price</f:verbatim>
+						</f:facet>
+						<h:outputText value = "#{b.price }"></h:outputText>
+					</p:column>
+			</p:dataTable>
+		</p:fieldset>
+		</h:form>
+		
+</ui:define>
+</ui:composition>
+</html>
