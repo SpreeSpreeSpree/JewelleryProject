@@ -1,1 +1,1 @@
-"# JewelleryProject" 
+Проект магазин на мові Java за допомогою фреймворку Hibernet
